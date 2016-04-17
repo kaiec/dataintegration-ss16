@@ -1,0 +1,23 @@
+{
+  "name": "dataintegration-ss16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "heilbronn.js",
+  "dependencies": {
+    "mongodb": "^2.1.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaiec/dataintegration-ss16.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaiec/dataintegration-ss16/issues"
+  },
+  "homepage": "https://github.com/kaiec/dataintegration-ss16#readme"
+}
