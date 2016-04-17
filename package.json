@@ -4,6 +4,7 @@
   "description": "",
   "main": "heilbronn.js",
   "dependencies": {
+    "csvrow": "^0.1.0",
     "mongodb": "^2.1.16"
   },
   "devDependencies": {},

@@ -1,4 +1,5 @@
-fs = require('fs');
+var fs = require('fs');
+var csvrow = require('csvrow');
 
 function writeToFile(filename, data) {
    var err = fs.appendFileSync(filename, data + "\n");
@@ -33,7 +34,7 @@ fs.readFile('Liste_PPN-ExNr_HSHN-libre.csv', 'utf8', function (err,inhalt) {
   for (var i = 0; i < lines.length; i++) {
      if (i==0) continue;
      var line = lines[i];
-     var tokens = line.split(",");
+     var tokens = csvrow.parse(line);
      if (tokens.length!=5) {
         error("Komische Zeile (" + (i+1) + "): " + line);
      } else {
@@ -47,7 +48,8 @@ fs.readFile('Liste_PPN-ExNr_HSHN-libre.csv', 'utf8', function (err,inhalt) {
            exemplar: tokens[1],
            signatur: tokens[2],
            barcode: tokens[3],
-           sigel: tokens[4]
+           sigel: tokens[4],
+           sourceline: i+1
         };
         result.push(exemplar);
      }
