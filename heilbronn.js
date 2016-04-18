@@ -10,13 +10,13 @@ function writeToFile(filename, data) {
 }
 
 function resetFiles() {
-    fs.writeFileSync("output.json", "");
+    fs.writeFileSync("exemplars.json", "");
     fs.writeFileSync("error.log", "");
 }
 
 
 function output(data) {
-    writeToFile("output.json", data);
+    writeToFile("exemplars.json", data);
 }
 
 function error(data) {

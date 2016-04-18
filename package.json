@@ -5,7 +5,8 @@
   "main": "heilbronn.js",
   "dependencies": {
     "csvrow": "^0.1.0",
-    "mongodb": "^2.1.16"
+    "mongodb": "^2.1.16",
+    "request": "^2.72.0"
   },
   "devDependencies": {},
   "scripts": {
