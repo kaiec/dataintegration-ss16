@@ -2,22 +2,8 @@ var request = require('request');
 var xpath = require('xpath');
 var dom = require('xmldom').DOMParser;
 
-function indexBy(arr, prop) {
-	return arr.reduce(function (prev, item) {
-		if (!(item[prop]in prev))
-			prev[item[prop]] = [];
-		prev[item[prop]].push(item);
-		return prev;
-	}, {});
+var ppnsList = require("./ppnlist.json");
 
-}
-
-var exemplars = require("./exemplars.json");
-var ppns = indexBy(exemplars, "ppn");
-var ppnsList = [];
-for (ppn in ppns) {
-	ppnsList.push(ppn);
-}
 var ppnIndex = 0;
 var hasMorePPNs = function () {
 	return ppnIndex < ppnsList.length;
