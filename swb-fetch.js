@@ -67,6 +67,16 @@ MongoClient.connect(url, function (err, db) {
 							});
 						} else {
                      console.log("Error: " + JSON.stringify(error) + " / Response: " + JSON.stringify(response));
+                     console.log("Resuming in 10 seconds...");
+                     ppnsList.push(ppn);
+                     setTimeout(function() {
+  									if (hasMorePPNs()) {
+										withNextPPN(processPPN);
+									} else {
+                              console.log("No more PPNS.")
+                           }                        
+                     }, 10000);
+
                   }
 					})
 				} else {
