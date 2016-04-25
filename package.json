@@ -4,6 +4,9 @@
   "description": "",
   "main": "heilbronn.js",
   "dependencies": {
+    "array.prototype.find": "^2.0.0",
+    "array.prototype.findindex": "^2.0.0",
+    "cheerio": "^0.20.0",
     "csvrow": "^0.1.0",
     "mongodb": "^2.1.16",
     "mysql": "^2.10.2",
