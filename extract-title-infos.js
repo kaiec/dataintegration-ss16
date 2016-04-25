@@ -15,6 +15,24 @@ var withNextPPN = function (callback) {
 	}, 1);
 }
 
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'dataintegration',
+  password : 'SisAne',
+  database : 'dataintegration'
+});
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
+
+
 //lets require/import the mongodb native drivers.
 var mongodb = require('mongodb');
 
@@ -55,7 +73,31 @@ MongoClient.connect(url, function (err, db) {
                var xml = res.xml;
                var doc = new dom().parseFromString(xml);
                var title = xpath.select('//datafield[@tag="245"]/subfield[@code="a"]/text()', doc).toString();
-					console.log("PPN: " + ppn + " / Title: " + title)
+               var rvk = xpath.select('//datafield[@tag="936"]/subfield[@code="a"]/text()', doc);
+               console.log(rvk);
+               var subjects = xpath.select('//datafield[@tag="689"]/subfield[@code="a"]/text()', doc).toString();
+               var verlag = xpath.select('//datafield[@tag="260"]/subfield[@code="b"]/text()', doc).toString().replace(/,$/, "");
+               var ort = xpath.select('//datafield[@tag="260"]/subfield[@code="a"]/text()', doc).toString();
+               var jahr = xpath.select('//datafield[@tag="260"]/subfield[@code="c"]/text()', doc).toString();
+               // RVK: //datafield[@tag="936"]/subfield[@code="a"] quelle: rvk annehmen
+               // Schlagwort: //datafield[@tag="689"]/subfield[@code="a"], code="2" muss GND sein
+					console.log("PPN: " + ppn + " / Title: " + title);
+               console.log("RVK: " + rvk + " / Subjects: " + subjects);
+               
+               var obj = {
+                  titel: title,
+                  ppn: ppn,
+                  verlag: ort + verlag,
+                  jahr: parseInt(jahr)
+               };
+               
+               connection.query('INSERT INTO titel SET ?', obj, function(err, result) {
+               if (err) throw err;
+                  console.log('Inserted: ' + ppn);
+               });
+
+
+               
                if (hasMorePPNs()) {
 						withNextPPN(processPPN);
 					} else {

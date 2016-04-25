@@ -6,6 +6,7 @@
   "dependencies": {
     "csvrow": "^0.1.0",
     "mongodb": "^2.1.16",
+    "mysql": "^2.10.2",
     "request": "^2.72.0",
     "xmldom": "^0.1.22",
     "xpath": "0.0.23"
